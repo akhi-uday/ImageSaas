@@ -70,7 +70,7 @@ def get_total_ec2_upcount():
 
 
 def get_instance_ids():
-    ec2 = boto3.resource('ec2',region_name="us-east-1",aws_secret_access_key="tM48E1xrB2Ufyf3mPM2XBPT7y6AerSip9ChcCubj",aws_access_key_id="AKIAREJOAPMAGDJVE5L4")
+    ec2 = boto3.resource('ec2',region_name="us-east-1",aws_secret_access_key="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",aws_access_key_id="AKIAREJOAPMAH77ZCSUY")
     for instance in ec2.instances.all():
         #print (instance.id)
         #print(str(instance.state))
