@@ -22,12 +22,11 @@ def controller():
 
     upcount = get_total_ec2_upcount()
 
-    # Case-2 -> upscale
     if upcount < instanceCount:
         upscale(que_length, upcount)
 
     # Case-3 -> check if downscale is required
-    if upcount == instanceCount:  # 15 is the total number of instances available out of 20 resources
+    if upcount == instanceCount:
         if que_length < upcount:
 
              downscale(que_length,upcount)
@@ -38,7 +37,7 @@ def shut_all_instances():
             ec2.update_instance_state(instance,0)
 
 def upscale(que_length,upcount):
-    diff=min(que_length,20-upcount)
+    diff=min(que_length,instanceCount-upcount)
     for i in range(instanceCount):
         if(diff==0):
             break
@@ -73,7 +72,7 @@ def get_total_ec2_upcount():
 def get_instance_ids():
     ec2 = boto3.resource('ec2',region_name="us-east-1",aws_secret_access_key="tM48E1xrB2Ufyf3mPM2XBPT7y6AerSip9ChcCubj",aws_access_key_id="AKIAREJOAPMAGDJVE5L4")
     for instance in ec2.instances.all():
-        print (instance.id)
+        #print (instance.id)
         #print(str(instance.state))
         myinstanceid=get_my_instance_id()
         if myinstanceid!=instance.id and instance.state['Name']!='terminated':
